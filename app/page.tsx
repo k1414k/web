@@ -1,5 +1,55 @@
 import Link from "next/link";
 
+const currentProjects = [
+  {
+    title: "Auction",
+    status: "Building",
+    description:
+      "Rails API と Next.js を使った中古オークションサービス。",
+    points: [
+      "API とフロントを分離",
+      "一覧・詳細・購入導線を整理",
+      "保守しやすい構成を意識",
+    ],
+    href: "https://auction.jongin.blog",
+    github: "https://github.com/k1414k/auction",
+  },
+  {
+    title: "Lab",
+    status: "Active",
+    description:
+      "中古車テーマの実験用プロダクト。UI と導線の検証用。",
+    points: [
+      "軽く試せる構成",
+      "改善しやすさ重視",
+      "ポータルとの接続を整理中",
+    ],
+    href: "https://lab.jongin.blog",
+    github: "https://github.com/k1414k/lab",
+  },
+];
+
+const pastProjects = [
+  {
+    title: "Jongin Blog",
+    status: "Planned",
+    description: "設計判断や制作記録をまとめるページ。",
+    href: "/blog",
+  },
+  {
+    title: "Project Archive",
+    status: "Planned",
+    description: "過去制作物を一覧で見られるページ。",
+    href: "/projects",
+  },
+  {
+    title: "Architecture Notes",
+    status: "Planned",
+    description: "技術選定や構成意図を残すページ。",
+    href: "/notes",
+  },
+];
+
 const skills = [
   "Next.js",
   "React",
@@ -9,346 +59,283 @@ const skills = [
   "Docker",
   "PostgreSQL",
   "GitHub Actions",
-  "REST API",
-  "UI/UX",
-];
-
-const projects = [
-  {
-    title: "Auction",
-    subtitle: "中古オークションサービス",
-    description:
-      "Rails API + Next.js を中心に、出品・閲覧・購入導線を意識して設計している中古オークションサービス。機能を作るだけでなく、保守性・責務分離・運用しやすさも重視しています。",
-    href: "https://auction.jongin.blog",
-    github: "https://github.com/k1414k/auction",
-    status: "Building",
-    tech: ["Next.js", "TypeScript", "Ruby on Rails", "AWS", "Docker"],
-    highlights: [
-      "フロントとAPIを分離した構成",
-      "プロダクトとしての導線・一覧・詳細体験を意識",
-      "保守性を意識した設計と責務分割",
-    ],
-  },
-  {
-    title: "Lab",
-    subtitle: "中古車サービス / 実験用プロダクト",
-    description:
-      "機能やUIの実験、プロダクト仮説の検証を目的にしたサービス。アイデアを形にする速さと、後から改善しやすい構成の両立を意識しています。",
-    href: "https://lab.jongin.blog",
-    github: "https://github.com/k1414k/lab",
-    status: "Active",
-    tech: ["Next.js", "React", "Tailwind CSS"],
-    highlights: [
-      "仮説検証を回しやすい軽量構成",
-      "UI改善の実験場として運用",
-      "ポータルから他サービスへつなぐ導線設計",
-    ],
-  },
-  {
-    title: "Jongin Blog",
-    subtitle: "学習・設計・制作記録",
-    description:
-      "学んだことをそのままメモするだけでなく、『なぜそうしたか』まで残していくブログ。今後は設計判断・失敗談・改善過程も公開していく予定です。",
-    href: "/blog",
-    github: "https://github.com/k1414k",
-    status: "Soon",
-    tech: ["Next.js", "MDX or CMS"],
-    highlights: [
-      "学習ログではなく設計ログを残す",
-      "就活で見られやすい判断プロセスを可視化",
-      "制作物との往復導線を作る",
-    ],
-  },
-];
-
-const values = [
-  {
-    title: "保守性を重視",
-    description:
-      "動くだけでなく、後から読める・直せる・広げられるコードを書くことを重視しています。",
-  },
-  {
-    title: "プロダクト目線",
-    description:
-      "画面単体ではなく、ユーザー導線・価値提供・改善余地を含めて考えるのが好きです。",
-  },
-  {
-    title: "理解して作る",
-    description:
-      "AIツールが強くなった今こそ、表面的に作るのではなく、設計意図と仕組みを理解して作ることを大切にしています。",
-  },
 ];
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-zinc-50 text-zinc-900">
-      <main className="mx-auto flex w-full max-w-6xl flex-col px-6 py-10 sm:px-10 lg:px-12">
-        {/* Header */}
-        <header className="mb-16 flex items-center justify-between">
-          <Link href="/" className="text-sm font-semibold tracking-[0.2em] text-zinc-600 uppercase">
-            jongin.blog
-          </Link>
+    <div className="min-h-screen bg-[#f5f5f3] text-zinc-900">
+      <main className="mx-auto max-w-[1600px] px-4 py-4 sm:px-6 lg:px-8">
+        <div className="grid min-h-[calc(100vh-2rem)] gap-4 lg:grid-cols-[280px_minmax(0,1fr)_320px]">
+          {/* Left */}
+          <aside className="order-1 rounded-[28px] border border-zinc-200 bg-white p-5 shadow-sm lg:sticky lg:top-4 lg:h-[calc(100vh-2rem)] lg:overflow-auto">
+            <div className="flex h-full flex-col">
+              <div>
+                <Link
+                  href="/"
+                  className="text-xs font-semibold uppercase tracking-[0.22em] text-zinc-500"
+                >
+                  jongin.blog
+                </Link>
 
-          <nav className="hidden gap-6 text-sm text-zinc-600 md:flex">
-            <a href="#about" className="hover:text-zinc-900 transition-colors">About</a>
-            <a href="#projects" className="hover:text-zinc-900 transition-colors">Projects</a>
-            <a href="#skills" className="hover:text-zinc-900 transition-colors">Skills</a>
-            <a href="#contact" className="hover:text-zinc-900 transition-colors">Contact</a>
-          </nav>
-        </header>
+                <div className="mt-8">
+                  <div className="h-14 w-14 rounded-2xl bg-zinc-900" />
+                  <h1 className="mt-4 text-2xl font-semibold tracking-tight">
+                    LEE JONGIN
+                  </h1>
+                  <p className="mt-2 text-sm leading-7 text-zinc-600">
+                    Full Stack Developer
+                  </p>
+                </div>
 
-        {/* Hero */}
-        <section className="grid gap-10 rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm md:grid-cols-[1.4fr_0.9fr] md:p-12">
-          <div className="flex flex-col justify-center">
-            <div className="mb-4 inline-flex w-fit rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-700">
-              Full Stack Developer / Product-minded Engineer
-            </div>
+                <div className="mt-8 rounded-2xl border border-zinc-200 bg-zinc-50 p-4">
+                  <p className="text-xs uppercase tracking-[0.18em] text-zinc-500">
+                    About
+                  </p>
+                  <p className="mt-3 text-sm leading-7 text-zinc-600">
+                    2019年から開発を継続。Next.js、Rails、AWS を中心に、
+                    保守しやすい構成を意識して作っています。
+                  </p>
+                </div>
 
-            <h1 className="max-w-3xl text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
-              こんにちは、<br className="hidden sm:block" />
-              <span className="text-zinc-950">LEE JONGIN</span> です。
-            </h1>
-
-            <p className="mt-6 max-w-2xl text-base leading-8 text-zinc-600 sm:text-lg">
-              コードを書いて、その通りに動く面白さに魅了され、
-              2019年から開発を続けています。
-              ただ動くものではなく、<span className="font-semibold text-zinc-900">保守性が高く、改善し続けられるプロダクト</span>
-              を作ることを大事にしています。
-            </p>
-
-            <p className="mt-4 max-w-2xl text-base leading-8 text-zinc-600 sm:text-lg">
-              最近はAIツールの進化によって、実装力だけでなく
-              <span className="font-semibold text-zinc-900">「本質を理解する力」と「プロダクト全体を俯瞰する力」</span>
-              がより重要だと考えています。
-            </p>
-
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a
-                href="#projects"
-                className="inline-flex h-12 items-center justify-center rounded-xl bg-zinc-900 px-5 text-sm font-medium text-white transition hover:opacity-90"
-              >
-                プロジェクトを見る
-              </a>
-              <a
-                href="https://github.com/k1414k"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex h-12 items-center justify-center rounded-xl border border-zinc-300 bg-white px-5 text-sm font-medium text-zinc-900 transition hover:bg-zinc-100"
-              >
-                GitHub
-              </a>
-            </div>
-          </div>
-
-          <div className="flex flex-col justify-between rounded-2xl bg-zinc-900 p-6 text-white">
-            <div>
-              <p className="text-sm text-zinc-300">Now Building</p>
-              <h2 className="mt-2 text-2xl font-semibold">Auction Service</h2>
-              <p className="mt-4 text-sm leading-7 text-zinc-300">
-                Rails API + Next.js を軸に、中古オークションサービスを開発中。
-                UI・設計・運用を分けて考えながら、長く育てられる形を目指しています。
-              </p>
-            </div>
-
-            <div className="mt-8 space-y-3 text-sm text-zinc-300">
-              <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
-                <span>Main Stack</span>
-                <span className="font-medium text-white">Next.js / Rails / AWS</span>
+                <div className="mt-4 rounded-2xl border border-zinc-200 bg-zinc-50 p-4">
+                  <p className="text-xs uppercase tracking-[0.18em] text-zinc-500">
+                    Focus
+                  </p>
+                  <ul className="mt-3 space-y-2 text-sm text-zinc-700">
+                    <li>Marketplace</li>
+                    <li>UI / UX</li>
+                    <li>Maintainability</li>
+                  </ul>
+                </div>
               </div>
-              <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
-                <span>Focus</span>
-                <span className="font-medium text-white">Maintainability</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>Mindset</span>
-                <span className="font-medium text-white">Build + Product View</span>
-              </div>
-            </div>
-          </div>
-        </section>
 
-        {/* About */}
-        <section id="about" className="mt-24">
-          <div className="mb-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-zinc-500">
-              About
-            </p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight">どんな開発者か</h2>
-          </div>
+              <div className="mt-6 grid gap-3">
+                <a
+                  href="https://github.com/k1414k"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-11 items-center justify-center rounded-2xl bg-zinc-900 text-sm font-medium text-white transition hover:opacity-90"
+                >
+                  GitHub
+                </a>
+                <a
+                  href="mailto:your-email@example.com"
+                  className="inline-flex h-11 items-center justify-center rounded-2xl border border-zinc-300 bg-white text-sm font-medium text-zinc-900 transition hover:bg-zinc-50"
+                >
+                  Contact
+                </a>
+              </div>
 
-          <div className="grid gap-6 md:grid-cols-3">
-            {values.map((value) => (
-              <div
-                key={value.title}
-                className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm"
-              >
-                <h3 className="text-lg font-semibold">{value.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-zinc-600">
-                  {value.description}
+              <div className="mt-8 border-t border-zinc-200 pt-6">
+                <p className="text-xs uppercase tracking-[0.18em] text-zinc-500">
+                  Stack
                 </p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs text-zinc-700"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
               </div>
-            ))}
-          </div>
-        </section>
 
-        {/* Projects */}
-        <section id="projects" className="mt-24">
-          <div className="mb-8 flex items-end justify-between gap-4">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-zinc-500">
-                Projects
-              </p>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight">
-                現在のプロジェクトと制作物
-              </h2>
+              <div className="mt-auto pt-8 text-xs text-zinc-400">
+                © 2026 LEE JONGIN
+              </div>
             </div>
-            <a
-              href="https://github.com/k1414k"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden text-sm font-medium text-zinc-600 transition hover:text-zinc-900 md:inline-block"
-            >
-              すべて見る →
-            </a>
-          </div>
+          </aside>
 
-          <div className="space-y-6">
-            {projects.map((project) => (
-              <article
-                key={project.title}
-                className="overflow-hidden rounded-3xl border border-zinc-200 bg-white shadow-sm"
-              >
-                <div className="grid gap-0 lg:grid-cols-[1.25fr_0.95fr]">
-                  <div className="p-8 md:p-10">
-                    <div className="flex flex-wrap items-center gap-3">
-                      <span className="rounded-full bg-zinc-100 px-3 py-1 text-xs font-medium text-zinc-700">
-                        {project.status}
-                      </span>
-                      <span className="text-sm text-zinc-500">{project.subtitle}</span>
-                    </div>
+          {/* Center */}
+          <section className="order-2 rounded-[28px] border border-zinc-200 bg-white p-5 shadow-sm sm:p-6 lg:p-8">
+            <div className="border-b border-zinc-200 pb-6">
+              <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                Current
+              </p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+                現在進行中のプロジェクト
+              </h2>
+              <p className="mt-3 max-w-2xl text-sm leading-7 text-zinc-600 sm:text-base">
+                いま作っているものと、設計で意識している点を中心にまとめています。
+              </p>
+            </div>
 
-                    <h3 className="mt-4 text-2xl font-bold tracking-tight">
-                      {project.title}
-                    </h3>
+            <div className="mt-6 space-y-5">
+              {currentProjects.map((project, index) => (
+                <div className="animated-border-card"
+                    key={project.title}
+                >
+                  <article
+                    className="overflow-hidden rounded-[26px] border border-zinc-200 bg-zinc-50
+                      animated-border-inner overflow-hidden rounded-[25px]"
+                  >
+                    <a
+                      href={project.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block transition hover:bg-zinc-100/70"
+                    >
+                      <div className="p-5 sm:p-6">
+                        <div className="flex flex-wrap items-center gap-3">
+                          <span
+                            className={`rounded-full px-3 py-1 text-xs font-medium ${
+                              index === 0
+                                ? "bg-zinc-900 text-white"
+                                : "border border-zinc-300 bg-white text-zinc-700"
+                            }`}
+                          >
+                            {project.status}
+                          </span>
+                          <span className="text-sm text-zinc-500">Open project</span>
+                        </div>
 
-                    <p className="mt-4 max-w-2xl text-sm leading-7 text-zinc-600 sm:text-base">
-                      {project.description}
-                    </p>
+                        <div className="mt-4 grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
+                          <div>
+                            <h3 className="text-2xl font-semibold tracking-tight">
+                              {project.title}
+                            </h3>
+                            <p className="mt-3 text-sm leading-7 text-zinc-600 sm:text-base">
+                              {project.description}
+                            </p>
 
-                    <div className="mt-6 flex flex-wrap gap-2">
-                      {project.tech.map((item) => (
-                        <span
-                          key={item}
-                          className="rounded-full border border-zinc-200 bg-zinc-50 px-3 py-1 text-xs text-zinc-700"
-                        >
-                          {item}
-                        </span>
-                      ))}
-                    </div>
+                            <div className="mt-5 flex flex-wrap gap-2">
+                              {project.points.map((point) => (
+                                <span
+                                  key={point}
+                                  className="rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs text-zinc-700"
+                                >
+                                  {point}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
 
-                    <div className="mt-8 flex flex-wrap gap-3">
+                          <div className="rounded-[22px] border border-zinc-200 bg-white p-4">
+                            <p className="text-xs uppercase tracking-[0.18em] text-zinc-500">
+                              Structure
+                            </p>
+                            <div className="mt-4 space-y-3">
+                              <div className="rounded-2xl bg-zinc-100 px-4 py-3 text-sm text-zinc-700">
+                                Frontend / Next.js
+                              </div>
+                              <div className="rounded-2xl bg-zinc-100 px-4 py-3 text-sm text-zinc-700">
+                                Backend / Rails API
+                              </div>
+                              <div className="rounded-2xl bg-zinc-100 px-4 py-3 text-sm text-zinc-700">
+                                Infra / AWS
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+
+                    <div className="flex flex-col gap-3 border-t border-zinc-200 bg-white p-4 sm:flex-row">
                       <a
                         href={project.href}
-                        target={project.href.startsWith("http") ? "_blank" : undefined}
-                        rel={project.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                        className="inline-flex h-11 items-center justify-center rounded-xl bg-zinc-900 px-4 text-sm font-medium text-white transition hover:opacity-90"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex h-11 flex-1 items-center justify-center rounded-2xl bg-zinc-900 text-sm font-medium text-white transition hover:opacity-90"
                       >
-                        プロジェクトを見る
+                        Live
                       </a>
                       <a
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex h-11 items-center justify-center rounded-xl border border-zinc-300 bg-white px-4 text-sm font-medium text-zinc-900 transition hover:bg-zinc-100"
+                        className="inline-flex h-11 flex-1 items-center justify-center rounded-2xl border border-zinc-300 bg-white text-sm font-medium text-zinc-900 transition hover:bg-zinc-50"
                       >
                         GitHub
                       </a>
                     </div>
-                  </div>
-
-                  <div className="border-t border-zinc-200 bg-zinc-50 p-8 lg:border-t-0 lg:border-l">
-                    <p className="text-sm font-semibold text-zinc-900">What I focused on</p>
-                    <ul className="mt-4 space-y-3">
-                      {project.highlights.map((point) => (
-                        <li
-                          key={point}
-                          className="rounded-2xl border border-zinc-200 bg-white px-4 py-3 text-sm leading-7 text-zinc-600"
-                        >
-                          {point}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  </article>
                 </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        {/* Skills */}
-        <section id="skills" className="mt-24">
-          <div className="mb-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-zinc-500">
-              Skills
-            </p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight">対応技術</h2>
-            <p className="mt-3 max-w-2xl text-sm leading-7 text-zinc-600 sm:text-base">
-              特定技術を並べるだけでなく、どの技術をどの責務に使うべきかを考えながら選定します。
-            </p>
-          </div>
-
-          <div className="rounded-3xl border border-zinc-200 bg-white p-8 shadow-sm">
-            <div className="flex flex-wrap gap-3">
-              {skills.map((skill) => (
-                <span
-                  key={skill}
-                  className="rounded-full border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm font-medium text-zinc-800"
-                >
-                  {skill}
-                </span>
               ))}
             </div>
-          </div>
-        </section>
 
-        {/* Contact */}
-        <section
-          id="contact"
-          className="mt-24 rounded-3xl border border-zinc-200 bg-zinc-900 p-8 text-white shadow-sm md:p-10"
-        >
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-zinc-400">
-            Contact
-          </p>
-          <h2 className="mt-2 text-3xl font-bold tracking-tight">
-            作るだけでなく、育てられるプロダクトを。
-          </h2>
-          <p className="mt-4 max-w-2xl text-sm leading-7 text-zinc-300 sm:text-base">
-            フロントエンド、バックエンド、設計、改善まで含めて、
-            長く運用できる形を意識して開発しています。
-            詳細はGitHubや各プロジェクトからご覧ください。
-          </p>
+            <div className="mt-8 grid gap-4 md:grid-cols-2">
+              <div className="rounded-[24px] border border-zinc-200 bg-zinc-50 p-5">
+                <p className="text-xs uppercase tracking-[0.18em] text-zinc-500">
+                  Design
+                </p>
+                <p className="mt-3 text-sm leading-7 text-zinc-600">
+                  実装だけでなく、責務分離と今後の修正しやすさを意識しています。
+                </p>
+              </div>
+              <div className="rounded-[24px] border border-zinc-200 bg-zinc-50 p-5">
+                <p className="text-xs uppercase tracking-[0.18em] text-zinc-500">
+                  Direction
+                </p>
+                <p className="mt-3 text-sm leading-7 text-zinc-600">
+                  UI、構成、運用のバランスを見ながら改善を続けています。
+                </p>
+              </div>
+            </div>
+          </section>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a
-              href="https://github.com/k1414k"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-12 items-center justify-center rounded-xl bg-white px-5 text-sm font-medium text-zinc-900 transition hover:bg-zinc-200"
-            >
-              GitHubを見る
-            </a>
-            <a
-              href="mailto:your-email@example.com"
-              className="inline-flex h-12 items-center justify-center rounded-xl border border-zinc-700 px-5 text-sm font-medium text-white transition hover:bg-zinc-800"
-            >
-              メールで連絡
-            </a>
-          </div>
-        </section>
+          {/* Right */}
+          <aside className="order-3 rounded-[28px] border border-zinc-200 bg-white p-5 shadow-sm lg:sticky lg:top-4 lg:h-[calc(100vh-2rem)] lg:overflow-auto">
+            <div>
+              <p className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+                Archive
+              </p>
+              <h2 className="mt-3 text-2xl font-semibold tracking-tight">
+                これまでと次
+              </h2>
+              <p className="mt-3 text-sm leading-7 text-zinc-600">
+                完了済みや、今後追加するページの入口です。
+              </p>
+            </div>
 
-        <footer className="mt-10 py-8 text-sm text-zinc-500">
-          © 2026 LEE JONGIN. Built with Next.js.
-        </footer>
+            <div className="mt-6 space-y-4">
+              {pastProjects.map((project) => (
+                <a
+                  key={project.title}
+                  href={project.href}
+                  className="block rounded-[24px] border border-zinc-200 bg-zinc-50 p-5 transition hover:bg-zinc-100"
+                >
+                  <div className="flex items-start justify-between gap-3">
+                    <h3 className="text-base font-semibold text-zinc-900">
+                      {project.title}
+                    </h3>
+                    <span className="rounded-full border border-zinc-300 bg-white px-3 py-1 text-[11px] text-zinc-600">
+                      {project.status}
+                    </span>
+                  </div>
+                  <p className="mt-3 text-sm leading-7 text-zinc-600">
+                    {project.description}
+                  </p>
+                </a>
+              ))}
+            </div>
+
+            <div className="mt-6 rounded-[24px] border border-zinc-200 bg-zinc-50 p-5">
+              <p className="text-xs uppercase tracking-[0.18em] text-zinc-500">
+                Quick Links
+              </p>
+              <div className="mt-4 grid gap-3">
+                <a
+                  href="https://auction.jongin.blog"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-11 items-center justify-center rounded-2xl border border-zinc-300 bg-white text-sm font-medium text-zinc-900 transition hover:bg-zinc-100"
+                >
+                  Auction
+                </a>
+                <a
+                  href="https://lab.jongin.blog"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-11 items-center justify-center rounded-2xl border border-zinc-300 bg-white text-sm font-medium text-zinc-900 transition hover:bg-zinc-100"
+                >
+                  Lab
+                </a>
+              </div>
+            </div>
+          </aside>
+        </div>
       </main>
     </div>
   );
