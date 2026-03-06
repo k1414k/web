@@ -11,9 +11,10 @@ const currentProjects = [
     image: "/projects/auction.png",
     imageAlt: "Auction project preview",
     description: [
-      "中古オークションサービス。",
+      "オークションサービス",
+      "- 市場相場を分かりやすく買い手と売り手を繋ぐ",
       "",
-      "Next.js・Rails API を使い",
+      "使用技術 Next.js・Rails API",
       "GitHub Actions を用いて CI/CDで",
       "AWS 上にデプロイしています。",
     ],
@@ -28,7 +29,7 @@ const currentProjects = [
     imageAlt: "Admin project preview",
     description: [
       "管理者サイト",
-      "このドメイン上のプロジェクトを管理しています。",
+      "- このドメイン上のプロジェクトの管理・権限",
       "",
       "使用技術 Vue3・Rails API",
       "GitHub Actions を用いて CI/CDで",
