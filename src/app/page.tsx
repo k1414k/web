@@ -4,6 +4,8 @@ import Link from "next/link";
 import { getPosts } from "@/lib/api";
 import PostArchiveList from "@/components/posts/PostArchiveList";
 
+export const dynamic = "force-dynamic";
+
 const currentProjects = [
   {
     title: "Auction",
