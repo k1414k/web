@@ -3,6 +3,8 @@ import Link from "next/link";
 import { getPosts } from "@/lib/api";
 import PostCard from "@/components/posts/PostCard";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Blog | Jongin",
   description: "過去の制作や設計判断、振り返りをまとめた記事一覧。",

@@ -1,6 +1,5 @@
 // web/src/lib/api.ts
 import axios from "axios";
-import { cache } from "react";
 import type { PostDetail, PostSummary } from "@/types/post";
 
 export type ApiResult<T> =
@@ -33,45 +32,49 @@ function createApiClient() {
   });
 }
 
-export const getPosts = cache(async (): Promise<PostSummary[]> => {
+export const getPosts = async (): Promise<PostSummary[]> => {
   try {
     const api = createApiClient();
     const res = await api.get<{ posts: PostSummary[] }>("/web/v1/posts");
     return res.data.posts;
   } catch (error) {
-    console.error("[getPosts] failed:", error);
+    console.error("[getPosts] failed:", {
+      baseURL: resolveBaseURL(),
+      error,
+    });
     return [];
   }
-});
+};
 
-export const getPost = cache(
-  async (slug: string): Promise<ApiResult<PostDetail>> => {
-    try {
-      const api = createApiClient();
-      const res = await api.get<{ post: PostDetail }>(`/web/v1/posts/${slug}`);
+export const getPost = async (slug: string): Promise<ApiResult<PostDetail>> => {
+  try {
+    const api = createApiClient();
+    const res = await api.get<{ post: PostDetail }>(`/web/v1/posts/${slug}`);
 
-      return {
-        ok: true,
-        data: res.data.post,
-      };
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        if (error.response?.status === 404) {
-          return {
-            ok: false,
-            reason: "NOT_FOUND",
-          };
-        }
+    return {
+      ok: true,
+      data: res.data.post,
+    };
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      if (error.response?.status === 404) {
+        return {
+          ok: false,
+          reason: "NOT_FOUND",
+        };
       }
-
-      console.error(`[getPost] failed for slug="${slug}":`, error);
-
-      return {
-        ok: false,
-        reason: "UNAVAILABLE",
-      };
     }
+
+    console.error(`[getPost] failed for slug="${slug}":`, {
+      baseURL: resolveBaseURL(),
+      error,
+    });
+
+    return {
+      ok: false,
+      reason: "UNAVAILABLE",
+    };
   }
-);
+};
 
 export default createApiClient;
