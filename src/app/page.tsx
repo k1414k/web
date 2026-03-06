@@ -19,6 +19,7 @@ const currentProjects = [
     ],
     href: "https://auction.jongin.blog",
     github: "https://github.com/k1414k/auction",
+    slug: "/blog/designing-auction-architecture",
   },
   {
     title: "Admin",
@@ -35,6 +36,7 @@ const currentProjects = [
     ],
     href: "https://admin.jongin.blog",
     github: "https://github.com/k1414k/admin",
+    slug: "/blog/designing-infrastructure-for-app",
   },
 ];
 
@@ -92,7 +94,7 @@ export default async function HomePage() {
                   href="https://github.com/k1414k"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-11 items-center justify-center rounded-2xl bg-zinc-900 text-sm font-medium text-white transition hover:opacity-90"
+                  className="inline-flex h-11 items-center justify-center rounded-2xl bg-zinc-900 text-sm font-medium text-white transition hover:opacity-90 pr-3"
                 >
                   <div className="relative aspect-square w-8">
                     <Image
@@ -106,10 +108,10 @@ export default async function HomePage() {
                   GitHub
                 </a>
                 <a
-                  href="mailto:your-email@example.com"
+                  href="mailto:rihito4929@gmail.com"
                   className="inline-flex h-11 items-center justify-center rounded-2xl border border-zinc-300 bg-gray-500 text-sm font-medium text-white transition hover:bg-gray-400"
                 >
-                  メッセージ
+                  メールする
                 </a>
                 {/* ログイン不要ダイレクトにする */}
               </div>
@@ -142,7 +144,7 @@ export default async function HomePage() {
                 Current
               </p>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-                現在進行中のプロジェクト
+                プロジェクト一覧
               </h2>
             </div>
 
@@ -204,8 +206,7 @@ export default async function HomePage() {
                         </a>
 
                         <a
-                          href={project.github}
-                          target="_blank"
+                          href={project.slug}
                           rel="noopener noreferrer"
                           className="inline-flex h-11 items-center justify-center rounded-full border border-zinc-300 bg-white px-6 text-sm font-medium text-zinc-900 transition hover:bg-zinc-50"
                         >
