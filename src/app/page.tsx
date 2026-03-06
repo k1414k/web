@@ -20,6 +20,22 @@ const currentProjects = [
     href: "https://auction.jongin.blog",
     github: "https://github.com/k1414k/auction",
   },
+  {
+    title: "Admin",
+    status: "個人開発",
+    image: "/projects/admin.png",
+    imageAlt: "Admin project preview",
+    description: [
+      "管理者サイト",
+      "このドメイン上のプロジェクトを管理しています。",
+      "",
+      "使用技術 Vue3・Rails API",
+      "GitHub Actions を用いて CI/CDで",
+      "AWS 上にデプロイしています。",
+    ],
+    href: "https://admin.jongin.blog",
+    github: "https://github.com/k1414k/admin",
+  },
 ];
 
 const skills = [
@@ -93,8 +109,9 @@ export default async function HomePage() {
                   href="mailto:your-email@example.com"
                   className="inline-flex h-11 items-center justify-center rounded-2xl border border-zinc-300 bg-gray-500 text-sm font-medium text-white transition hover:bg-gray-400"
                 >
-                  直メッセージ（ログイン不要）
+                  メッセージ
                 </a>
+                {/* ログイン不要ダイレクトにする */}
               </div>
 
               <div className="mt-8 border-t border-zinc-200 pt-6">
@@ -135,7 +152,8 @@ export default async function HomePage() {
                   key={project.title}
                   className="rounded-[26px] border border-zinc-200 bg-zinc-50 p-5 sm:p-6"
                 >
-                  <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
+                  
+                  <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
                     <div>
                       <div className="flex flex-wrap items-center gap-3">
                         <span className="animated-border-card inline-flex rounded-full p-[1px]">
@@ -175,7 +193,7 @@ export default async function HomePage() {
                         >
                           サイトへ移動
                         </a>
-                        
+
                         <a
                           href={project.github}
                           target="_blank"
@@ -184,6 +202,7 @@ export default async function HomePage() {
                         >
                           GitHub
                         </a>
+
                         <a
                           href={project.github}
                           target="_blank"
@@ -195,14 +214,14 @@ export default async function HomePage() {
                       </div>
                     </div>
 
-                    <div className="overflow-hidden rounded-[22px] border border-zinc-200 bg-white shadow-sm">
-                      <div className="relative aspect-square w-full">
+                    <div className="overflow-hidden rounded-[22px] border border-zinc-200 bg-zinc-50 shadow-sm">
+                      <div className="relative h-[300px] w-full sm:h-[360px] lg:h-[430px]">
                         <Image
                           src={project.image}
                           alt={project.imageAlt}
                           fill
                           priority
-                          className="object-cover"
+                          className="object-contain object-center p-3"
                         />
                       </div>
                     </div>
