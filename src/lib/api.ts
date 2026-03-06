@@ -1,41 +1,77 @@
 // web/src/lib/api.ts
 import axios from "axios";
+import { cache } from "react";
 import type { PostDetail, PostSummary } from "@/types/post";
+
+export type ApiResult<T> =
+  | { ok: true; data: T }
+  | { ok: false; reason: "NOT_FOUND" | "UNAVAILABLE" };
 
 function resolveBaseURL() {
   const isServer = typeof window === "undefined";
 
-  // ✅ Server Component / Route Handler など「サーバ側」で叩くURL
-  // - Next が Docker 内: http://api:3000 (docker compose の service 名)
-  // - Next がローカル:  http://localhost:3000
-  const serverBase =
-    process.env.INTERNAL_API_BASE_URL || process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000";
+  if (isServer) {
+    return (
+      process.env.INTERNAL_API_BASE_URL ||
+      process.env.NEXT_PUBLIC_API_BASE_URL ||
+      "http://localhost:3000"
+    );
+  }
 
-  // ✅ Browser(クライアント) で叩くURL（公開URL or localhost）
-  const clientBase =
-    process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000";
-
-  return isServer ? serverBase : clientBase;
+  return process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3000";
 }
 
-const api = axios.create({
-  baseURL: resolveBaseURL(),
-  headers: { "Content-Type": "application/json", Accept: "application/json" },
-  withCredentials: true,
+function createApiClient() {
+  return axios.create({
+    baseURL: resolveBaseURL(),
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    withCredentials: true,
+    timeout: 8000,
+  });
+}
+
+export const getPosts = cache(async (): Promise<PostSummary[]> => {
+  try {
+    const api = createApiClient();
+    const res = await api.get<{ posts: PostSummary[] }>("/web/v1/posts");
+    return res.data.posts;
+  } catch (error) {
+    console.error("[getPosts] failed:", error);
+    return [];
+  }
 });
 
-export async function getPosts(): Promise<PostSummary[]> {
-  const res = await api.get<{ posts: PostSummary[] }>("/web/v1/posts");
-  return res.data.posts;
-}
+export const getPost = cache(
+  async (slug: string): Promise<ApiResult<PostDetail>> => {
+    try {
+      const api = createApiClient();
+      const res = await api.get<{ post: PostDetail }>(`/web/v1/posts/${slug}`);
 
-export async function getPost(slug: string): Promise<PostDetail | null> {
-  try {
-    const res = await api.get<{ post: PostDetail }>(`/web/v1/posts/${slug}`);
-    return res.data.post;
-  } catch {
-    return null;
+      return {
+        ok: true,
+        data: res.data.post,
+      };
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 404) {
+          return {
+            ok: false,
+            reason: "NOT_FOUND",
+          };
+        }
+      }
+
+      console.error(`[getPost] failed for slug="${slug}":`, error);
+
+      return {
+        ok: false,
+        reason: "UNAVAILABLE",
+      };
+    }
   }
-}
+);
 
-export default api;
+export default createApiClient;
